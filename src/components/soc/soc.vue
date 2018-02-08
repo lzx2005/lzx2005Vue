@@ -19,5 +19,5 @@
     .icon-img
       width 32px
       height 32px
-      padding 10px 10px
+      padding 25px 10px
 </style>
