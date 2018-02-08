@@ -8,14 +8,17 @@
       <div class="nav-item"><router-link to="/web">网站日志</router-link></div>
     </div>
     <router-view></router-view>
+    <v-footer></v-footer>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import header from './components/header/header';
+  import footer from './components/footer/footer';
   export default {
     components: {
-      'v-header': header
+      'v-header': header,
+      'v-footer': footer
     }
   };
 </script>
