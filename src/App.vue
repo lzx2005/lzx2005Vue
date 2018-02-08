@@ -25,12 +25,13 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   #app
+    width 60%
+    margin 0px auto
     .nav
       display flex
       height 50px
       line-height 50px
-      width 50%
-      margin 0px auto
+      margin-bottom 20px
       .nav-item
         flex 1
         text-align center

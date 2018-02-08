@@ -25,9 +25,7 @@
 
 <style lang="stylus" rel="stylesheet/stylus">
   .header-main
-    padding-top 200px
-    width 50%
-    margin 0px auto
+    padding-top 100px
     text-align center
     .avatar
       & > img

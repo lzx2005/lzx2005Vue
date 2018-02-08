@@ -20,4 +20,5 @@
       width 32px
       height 32px
       padding 25px 10px
+      box-sizing content-box
 </style>

@@ -14,7 +14,7 @@
   .footer-main
     text-align center
     margin  100px 0 0 0
-    padding-top 20px
+    padding 80px 0px
     font-size 12px
     color gray
     border-top 1px #f5f5f5 solid
