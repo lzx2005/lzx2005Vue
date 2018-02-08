@@ -2,11 +2,12 @@
   <div id="app">
     <v-header></v-header>
     <div class="nav">
-      <div class="nav-item">基本信息</div>
-      <div class="nav-item">作品</div>
-      <div class="nav-item">社交网络</div>
-      <div class="nav-item">网站架构</div>
+      <div class="nav-item"><router-link to="/info">基本信息</router-link></div>
+      <div class="nav-item"><router-link to="/pro">作品展示</router-link></div>
+      <div class="nav-item"><router-link to="/soc">社交网络</router-link></div>
+      <div class="nav-item"><router-link to="/web">网站架构</router-link></div>
     </div>
+    <router-view></router-view>
     <div class="content">这是详细信息</div>
   </div>
 </template>
