@@ -4,11 +4,9 @@
     <div class="nav">
       <div class="nav-item"><router-link to="/info">基本信息</router-link></div>
       <div class="nav-item"><router-link to="/pro">作品展示</router-link></div>
-      <div class="nav-item"><router-link to="/soc">社交网络</router-link></div>
       <div class="nav-item"><router-link to="/web">网站架构</router-link></div>
     </div>
     <router-view></router-view>
-    <div class="content">这是详细信息</div>
   </div>
 </template>
 
@@ -32,4 +30,10 @@
       .nav-item
         flex 1
         text-align center
+        & > a
+          display block
+          font-size 14px
+          color rgb(77, 85, 93)
+          &.active
+            color #2d8cf0
 </style>
