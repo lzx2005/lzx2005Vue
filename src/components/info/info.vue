@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="spin-container" v-if="spinShow">
+      <Spin size="large" fix></Spin>
+    </div>
     <div class="info-div" v-for="blog of blogs" :key="blog.blog_id">
       <Card class="card">
         <p slot="title">{{blog.title}}</p>
@@ -25,7 +28,8 @@
   export default {
     data () {
       return {
-        blogs: []
+        blogs: [],
+        spinShow: true
       };
     },
     methods: {
@@ -34,6 +38,7 @@
         this.$http.get('/iapi/blogs/1', {}).then((response) => {
           // 响应成功回调
           console.log(response);
+          this.spinShow = false;
           this.blogs = response.body.data;
         }, (response) => {
           console.log(2);
@@ -47,6 +52,12 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  .spin-container
+    display: inline-block;
+    width: 100%;
+    height: 100px;
+    position: relative;
+    border: 0px solid #eee;
   .info-div
     margin-bottom 20px
     .card
