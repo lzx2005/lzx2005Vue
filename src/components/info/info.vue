@@ -86,18 +86,15 @@
       getBlogs (page) {
         // 清空当前列表
         this.blogs = [];
-
         // 打开加载条显示
         this.spinShow = true;
         // Lambda写法
         this.$http.get('/iapi/blogs/' + page, {}).then((response) => {
           // 响应成功回调
-          console.log(response);
           this.spinShow = false;
           this.blogs = response.body.data;
           let resultSize = response.body.data.length;
           let pageSize = response.body.info.pageSize;
-          console.log(resultSize);
           if (resultSize < pageSize) {
             // 没有下一页
             this.hasNextPage = false;
