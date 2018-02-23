@@ -144,6 +144,7 @@
     border: 0px solid #eee;
   .info-div
     margin-bottom 20px
+    transform all 1s
     .card
       .card-footer
         padding-top 10px
@@ -151,10 +152,6 @@
           display block
   .slide-fade-enter-active
     transition: all .7s;
-  .slide-fade-leave-active
-    position: absolute;
-  .slide-fade-enter, .slide-fade-leave-to
-    opacity: 0;
   .button-div
     display flex ;
     .button-item
