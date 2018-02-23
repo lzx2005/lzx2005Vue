@@ -7,15 +7,18 @@ import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 import VueResource from 'vue-resource';
 import plugins from './plugins';
+import filter from './filters';
 
 Vue.use(VueResource);
 Vue.config.productionTip = false;
 Vue.use(iView);
 Vue.use(plugins);
+Vue.use(filter);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  filter,
   components: { App },
   template: '<App/>'
 });

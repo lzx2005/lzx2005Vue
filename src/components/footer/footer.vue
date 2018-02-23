@@ -2,7 +2,7 @@
     <div class="footer-main">
       © 2018. John Lee 李正先. All Rights Reserved.
       <br/>
-      Powered by <a href="https://vuejs.org/">Vue</a> & <a href="https://projects.spring.io/spring-boot/">Spring Boot</a>.
+      Powered by <a href="https://vuejs.org/">Vue</a> & <a href="https://koa.bootcss.com/">Koa</a>.
     </div>
 </template>
 
@@ -19,5 +19,5 @@
     color gray
     border-top 1px #f5f5f5 solid
     & > a
-      color gray
+      color #2d8cf0
 </style>
