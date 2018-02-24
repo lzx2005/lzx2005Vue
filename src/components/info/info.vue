@@ -64,12 +64,14 @@
 
     <Modal
       v-model="blogModal"
-      width="80%"
+      width="60%"
       :styles="{top: '20px',button:'20px'}">
       <div class="blog-info">
         <div class="blog-info-title">{{blogTitle}}</div>
         <div class="blog-info-desc">
-          <div class="blog-info-desc-item">1</div>
+          <div class="blog-info-desc-item">
+            2
+          </div>
           <div class="blog-info-desc-item">2</div>
           <div class="blog-info-desc-item">3</div>
           <div class="blog-info-desc-item">4</div>
@@ -220,36 +222,42 @@
       top 0;
   .ivu-modal-body
     padding 0px 80px 20px 80px;
-    font-size 20px;
-    line-height 40px;
+    font-size 16px;
+    line-height 1;
+    div
+      overflow scroll;
+      -webkit-overflow-scrolling touch;
+      -moz-overflow-scrolling touch;
+      -o-overflow-scrolling touch ;
     .blog-info
       width 100%;
       padding 50px 0px;
       .blog-info-title
         text-align center;
         width 100%;
-        font-size 50px;
+        font-size 40px;
         padding 20px 0px;
       .blog-info-desc
         width 100%;
         display flex;
         .blog-info-desc-item
           flex 1;
+          text-align center;
     h1
       margin 15px 0px;
-      font-size 50px;
+      font-size 35px;
     h2
       margin 15px 0px;
-      font-size 45px;
+      font-size 32px;
     h3
       margin 15px 0px;
-      font-size 40px;
+      font-size 27px;
     h4
       margin 15px 0px;
-      font-size 35px;
+      font-size 23px;
     h5
       margin 15px 0px;
-      font-size 30px;
+      font-size 20px;
     p
       margin 10px 0px;
       line-height 20px;
@@ -262,8 +270,23 @@
       margin-top 20px
       margin-bottom 20px
     pre
-      line-height 1
+      line-height 20px;
       font-size 12px;
+      word-break break-all;
+      word-wrap break-word;
     img
       margin 10px 0px;
+      max-width 100%;
+    ul
+      line-height 20px;
+      list-style disc;
+      li
+        list-style-type disc;
+    ol
+      line-height 20px;
+      list-style disc;
+      li
+        list-style-type disc;
+    strong
+      color #151515;
 </style>
