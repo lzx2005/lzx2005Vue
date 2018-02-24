@@ -9,12 +9,14 @@ import VueResource from 'vue-resource';
 import plugins from './plugins';
 import filter from './filters';
 import VueMarkdown from 'vue-markdown';
+import prismjs from 'prismjs';
 
 Vue.use(VueResource);
 Vue.config.productionTip = false;
 Vue.use(iView);
 Vue.use(plugins);
 Vue.use(filter);
+Vue.use(prismjs);
 
 /* eslint-disable no-new */
 new Vue({
@@ -22,6 +24,7 @@ new Vue({
   router,
   filter,
   VueMarkdown,
+  prismjs,
   components: { App },
   template: '<App/>'
 });

@@ -67,17 +67,23 @@
       width="60%"
       :styles="{top: '20px',button:'20px'}">
       <div class="blog-info">
-        <div class="blog-info-title">{{blogTitle}}</div>
+        <div class="blog-info-title">{{blog.title}}</div>
         <div class="blog-info-desc">
           <div class="blog-info-desc-item">
-            2
+            <Icon type="person" size="30"></Icon>
+            <div>{{blog.authon}}</div>
           </div>
-          <div class="blog-info-desc-item">2</div>
-          <div class="blog-info-desc-item">3</div>
-          <div class="blog-info-desc-item">4</div>
+          <div class="blog-info-desc-item">
+            <Icon type="eye" size="30"></Icon>
+            <div>{{blog.view}}</div>
+          </div>
+          <div class="blog-info-desc-item">
+            <Icon type="ios-timer" size="30"></Icon>
+            <div>{{blog.create_time | formatDate}}</div>
+          </div>
         </div>
       </div>
-      <VueMarkdown :source="blogContent" :anchor-attributes="anchorAttrs"></VueMarkdown>
+      <VueMarkdown :source="blog.content" :anchor-attributes="anchorAttrs"></VueMarkdown>
       <div slot="footer">
       </div>
     </Modal>
@@ -101,9 +107,7 @@
         hasPrevPage: false,
         buttonLoading: false,
         blogModal: false,
-        blogContent: '加载中...',
-        blogTitle: '',
-        blogAuthor: '',
+        blog: {},
         anchorAttrs: {
           target: '_blank',
           rel: 'noopener noreferrer nofollow'
@@ -168,8 +172,7 @@
           let blog = response.body.data;
           console.log(blog);
           if (blog) {
-            this.blogContent = blog.content;
-            this.blogTitle = blog.title;
+            this.blog = blog;
             this.blogModal = true;
           } else {
             this.$Notice.error({
@@ -289,4 +292,9 @@
         list-style-type disc;
     strong
       color #151515;
+    blockquote
+      margin 10px 0px;
+      padding 10px;
+      background-color rgba(255, 153, 0, 0.15);
+      border-left 5px solid rgba(255, 153, 0, 0.50);
 </style>
