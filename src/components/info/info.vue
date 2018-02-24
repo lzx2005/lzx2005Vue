@@ -4,7 +4,7 @@
       <Spin size="large" fix></Spin>
     </div>
     <transition-group name="slide-fade">
-      <div class="info-div" v-for="blog of blogs" :key="blog.blog_id">
+      <div class="info-div" v-for="blog of blogs" :key="blog.blog_id" @click="getBlog(blog.blog_id)">
         <Card class="card">
           <p slot="title">{{blog.title}}</p>
           <p slot="extra">
@@ -37,7 +37,7 @@
     <BackTop></BackTop>
     <div class="button-div">
       <div class="button-item" v-if="hasPrevPage">
-        <Button type="primary" @click="getPrevPage">
+        <Button type="primary" @click="getPrevPage" :loading="buttonLoading">
           <Icon type="chevron-left"></Icon>
           上一页
         </Button>
@@ -49,7 +49,7 @@
         </Button>
       </div>
       <div class="button-item button-pull-right" v-if="hasNextPage">
-        <Button type="primary" @click="getNextPage">
+        <Button type="primary" @click="getNextPage" :loading="buttonLoading">
           下一页
           <Icon type="chevron-right"></Icon>
         </Button>
@@ -61,20 +61,51 @@
         </Button>
       </div>
     </div>
+
+    <Modal
+      v-model="blogModal"
+      width="80%"
+      :styles="{top: '20px',button:'20px'}">
+      <div class="blog-info">
+        <div class="blog-info-title">{{blogTitle}}</div>
+        <div class="blog-info-desc">
+          <div class="blog-info-desc-item">1</div>
+          <div class="blog-info-desc-item">2</div>
+          <div class="blog-info-desc-item">3</div>
+          <div class="blog-info-desc-item">4</div>
+        </div>
+      </div>
+      <VueMarkdown :source="blogContent" :anchor-attributes="anchorAttrs"></VueMarkdown>
+      <div slot="footer">
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import {dateFilter} from '../../filters/date.js';
+  import VueMarkdown from 'vue-markdown';
 
   export default {
+    components: {
+      VueMarkdown
+    },
     data () {
       return {
         blogs: [],
         spinShow: true,
         page: 1,
-        hasNextPage: true,
-        hasPrevPage: true
+        hasNextPage: false,
+        hasPrevPage: false,
+        buttonLoading: false,
+        blogModal: false,
+        blogContent: '加载中...',
+        blogTitle: '',
+        blogAuthor: '',
+        anchorAttrs: {
+          target: '_blank',
+          rel: 'noopener noreferrer nofollow'
+        }
       };
     },
     filters: {
@@ -107,27 +138,50 @@
           } else {
             this.hasPrevPage = true;
           }
+          this.buttonLoading = false;
         }, (response) => {
           this.spinShow = false;
           this.$Notice.error({
             title: '请求失败',
             desc: response ? response.msg : '请求失败，请联系管理员crow2005@vip.qq.com'
           });
+          this.buttonLoading = false;
         });
       },
       getPrevPage () {
+        this.buttonLoading = true;
         let page = this.page;
         if (page > 1) {
           this.getBlogs(page - 1);
         }
       },
       getNextPage () {
+        this.buttonLoading = true;
         let page = this.page;
         this.getBlogs(page + 1);
+      },
+      getBlog (id) {
+        this.blogContent = '加载中...';
+        this.$http.get('/iapi/blogs/d/' + id, {}).then((response) => {
+          let blog = response.body.data;
+          console.log(blog);
+          if (blog) {
+            this.blogContent = blog.content;
+            this.blogTitle = blog.title;
+            this.blogModal = true;
+          } else {
+            this.$Notice.error({
+              title: '请求失败',
+              desc: blog.msg
+            });
+          }
+        }, (response) => {
+          this.$Notice.error({
+            title: '请求失败',
+            desc: response ? response.msg : '请求失败，请联系管理员crow2005@vip.qq.com'
+          });
+        });
       }
-      // shuffle: function () {
-      //   this.items = _.shuffle(this.items);
-      // }
     },
     created () {
       this.getBlogs(this.page);
@@ -158,4 +212,58 @@
       flex 1 ;
     .button-pull-right
       text-align right ;
+  .vertical-center-modal
+    display flex;
+    align-items center;
+    justify-content center;
+    .ivu-modal
+      top 0;
+  .ivu-modal-body
+    padding 0px 80px 20px 80px;
+    font-size 20px;
+    line-height 40px;
+    .blog-info
+      width 100%;
+      padding 50px 0px;
+      .blog-info-title
+        text-align center;
+        width 100%;
+        font-size 50px;
+        padding 20px 0px;
+      .blog-info-desc
+        width 100%;
+        display flex;
+        .blog-info-desc-item
+          flex 1;
+    h1
+      margin 15px 0px;
+      font-size 50px;
+    h2
+      margin 15px 0px;
+      font-size 45px;
+    h3
+      margin 15px 0px;
+      font-size 40px;
+    h4
+      margin 15px 0px;
+      font-size 35px;
+    h5
+      margin 15px 0px;
+      font-size 30px;
+    p
+      margin 10px 0px;
+      line-height 20px;
+      color gray;
+    hr
+      color #f1f1f1;
+      border none;
+      height 1px;
+      border-top 1px solid #f1f1f1;
+      margin-top 20px
+      margin-bottom 20px
+    pre
+      line-height 1
+      font-size 12px;
+    img
+      margin 10px 0px;
 </style>
