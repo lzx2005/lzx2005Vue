@@ -4,8 +4,8 @@
     <div class="nav">
       <div class="nav-item"><router-link to="/info">开发手记</router-link></div>
       <div class="nav-item"><router-link to="/pro">作品展示</router-link></div>
-      <div class="nav-item"><router-link to="/resume">个人简历</router-link></div>
-      <div class="nav-item"><router-link to="/web">网站日志</router-link></div>
+      <!--<div class="nav-item"><router-link to="/resume">个人简历</router-link></div>-->
+      <div class="nav-item"><router-link to="/web">关于本站</router-link></div>
     </div>
     <router-view></router-view>
     <v-footer></v-footer>

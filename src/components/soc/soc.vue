@@ -1,9 +1,9 @@
 <template>
     <div class="icon-main">
-      <img class="icon-img" src="./icon/gmail.png"/>
-      <img class="icon-img" src="./icon/github.png"/>
-      <img class="icon-img" src="./icon/weibo.png"/>
-      <img class="icon-img" src="./icon/zhihu.png"/>
+      <a href="mailto:lizhengxian2005@gamil.com" target="_blank"><img class="icon-img" src="./icon/gmail.png"/></a>
+      <a href="https://github.com/lzx2005" target="_blank"><img class="icon-img" src="./icon/github.png"/></a>
+      <a href="https://weibo.com/2557929062" target="_blank"><img class="icon-img" src="./icon/weibo.png"/></a>
+      <a href="https://www.zhihu.com/people/lzx2005" target="_blank"><img class="icon-img" src="./icon/zhihu.png"/></a>
       <!--<img class="icon-img" src="./icon/wechat.png"/>-->
       <!--<img class="icon-img" src="./icon/icon_zhifubao.png"/>-->
     </div>
