@@ -4,7 +4,7 @@
       <img class="icon-img" src="./icon/github.png"/>
       <img class="icon-img" src="./icon/weibo.png"/>
       <img class="icon-img" src="./icon/zhihu.png"/>
-      <img class="icon-img" src="./icon/wechat.png"/>
+      <!--<img class="icon-img" src="./icon/wechat.png"/>-->
       <!--<img class="icon-img" src="./icon/icon_zhifubao.png"/>-->
     </div>
 </template>
