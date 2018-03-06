@@ -264,7 +264,7 @@
     p
       margin 10px 0px;
       line-height 20px;
-      color gray;
+      color black;
     hr
       color #f1f1f1;
       border none;
