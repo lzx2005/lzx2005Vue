@@ -8,7 +8,8 @@
         <Card class="card">
           <p slot="title">{{blog.title}}</p>
           <p slot="extra">
-            <Tag color="blue">Java</Tag>
+            <Tag color="blue" v-if="blog.tag">{{blog.tag}}</Tag>
+            <Tag color="default" v-else>未指定标签</Tag>
           </p>
           <p>{{blog.description}}</p>
           <div class="card-footer">
@@ -71,7 +72,7 @@
         <div class="blog-info-desc">
           <div class="blog-info-desc-item">
             <Icon type="person" size="30"></Icon>
-            <div>{{blog.authon}}</div>
+            <div>{{blog.author}}</div>
           </div>
           <div class="blog-info-desc-item">
             <Icon type="eye" size="30"></Icon>
@@ -83,7 +84,7 @@
           </div>
         </div>
       </div>
-      <VueMarkdown :source="blog.content" :anchor-attributes="anchorAttrs"></VueMarkdown>
+      <VueMarkdown :source="blog.content" :anchor-attributes="anchorAttrs" v-highlight @rendered="rendered"></VueMarkdown>
       <div slot="footer">
       </div>
     </Modal>
@@ -93,6 +94,7 @@
 <script type="text/ecmascript-6">
   import {dateFilter} from '../../filters/date.js';
   import VueMarkdown from 'vue-markdown';
+  import prismjs from '../../../static/prism';
 
   export default {
     components: {
@@ -132,18 +134,9 @@
           this.blogs = response.body.data;
           let resultSize = response.body.data.length;
           let pageSize = response.body.info.pageSize;
-          if (resultSize < pageSize) {
-            // 没有下一页
-            this.hasNextPage = false;
-          } else {
-            this.hasNextPage = true;
-          }
+          this.hasNextPage = resultSize >= pageSize;
           this.page = response.body.info.page;
-          if (this.page <= 1) {
-            this.hasPrevPage = false;
-          } else {
-            this.hasPrevPage = true;
-          }
+          this.hasPrevPage = this.page > 1;
           this.buttonLoading = false;
         }, (response) => {
           this.spinShow = false;
@@ -167,13 +160,19 @@
         this.getBlogs(page + 1);
       },
       getBlog (id) {
-        this.blogContent = '加载中...';
         this.$http.get('/iapi/blogs/d/' + id, {}).then((response) => {
           let blog = response.body.data;
           console.log(blog);
           if (blog) {
             this.blog = blog;
             this.blogModal = true;
+            this.$nextTick(function () {
+              let el = this.$children[4].$el;
+              let blocks = el.querySelectorAll('pre code');
+              blocks.forEach((block) => {
+                prismjs.highlightElement(block);
+              });
+            });
           } else {
             this.$Notice.error({
               title: '请求失败',
@@ -186,6 +185,8 @@
             desc: response ? response.msg : '请求失败，请联系管理员crow2005@vip.qq.com'
           });
         });
+      },
+      rendered () {
       }
     },
     created () {
@@ -195,12 +196,14 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  @import "../../../static/prism.css"
   .spin-container
     display: inline-block;
     width: 100%;
     height: 100px;
     position: relative;
     border: 0px solid #eee;
+
   .info-div
     margin-bottom 20px
     transform all 1s
@@ -209,20 +212,24 @@
         padding-top 10px
         div
           display block
+
   .slide-fade-enter-active
     transition: all .7s;
+
   .button-div
-    display flex ;
+    display flex;
     .button-item
-      flex 1 ;
+      flex 1;
     .button-pull-right
-      text-align right ;
+      text-align right;
+
   .vertical-center-modal
     display flex;
     align-items center;
     justify-content center;
     .ivu-modal
       top 0;
+
   .ivu-modal-body
     padding 0px 80px 20px 80px;
     font-size 16px;
@@ -231,7 +238,7 @@
       overflow scroll;
       -webkit-overflow-scrolling touch;
       -moz-overflow-scrolling touch;
-      -o-overflow-scrolling touch ;
+      -o-overflow-scrolling touch;
     .blog-info
       width 100%;
       padding 50px 0px;
