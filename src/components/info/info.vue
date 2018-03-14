@@ -84,6 +84,9 @@
           </div>
         </div>
       </div>
+      <div class="spin-container" v-if="blogSpinShow">
+        <Spin size="large" fix></Spin>
+      </div>
       <VueMarkdown :source="blog.content" :anchor-attributes="anchorAttrs" v-highlight @rendered="rendered"></VueMarkdown>
       <div slot="footer">
       </div>
@@ -104,6 +107,7 @@
       return {
         blogs: [],
         spinShow: true,
+        blogSpinShow: true,
         page: 1,
         hasNextPage: false,
         hasPrevPage: false,
@@ -160,12 +164,15 @@
         this.getBlogs(page + 1);
       },
       getBlog (id) {
+        this.blog = {};
+        this.blogSpinShow = true;
+        this.blogModal = true;
         this.$http.get('/iapi/blogs/d/' + id, {}).then((response) => {
           let blog = response.body.data;
+          this.blogSpinShow = false;
           console.log(blog);
           if (blog) {
             this.blog = blog;
-            this.blogModal = true;
             this.$nextTick(function () {
               let el = this.$children[4].$el;
               let blocks = el.querySelectorAll('pre code');

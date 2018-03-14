@@ -2,7 +2,7 @@
     <div class="footer-main">
       © 2018. John Lee 李正先. All Rights Reserved.
       <br/>
-      Powered by <a href="https://vuejs.org/">Vue</a> & <a href="https://koa.bootcss.com/">Koa</a>.
+      Powered by <a target="_blank" href="https://vuejs.org/">Vue</a> & <a target="_blank" href="https://koa.bootcss.com/">Koa</a>.
     </div>
 </template>
 
