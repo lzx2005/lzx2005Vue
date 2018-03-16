@@ -26,13 +26,14 @@
     data () {
       return {
         repos: [],
-        to: '0584aa735872752dc',
-        ken: '6b04c9e0b557d7b65a492cb',
+        to: '4484de3309ae42dc1f50',
+        ken: '88201d2c53f10c0c1279',
         spinShow: true
       };
     },
     methods: {
       getRepos () {
+        let token = this.to + this.ken;
         this.spinShow = true;
         let obj = {
           params: {
@@ -41,7 +42,7 @@
             'visibility': 'public'
           },
           headers: {
-            'Authorization': 'bearer 0584aa735872752dc6b04c9e0b557d7b65a492cb'
+            'Authorization': 'bearer ' + token
           }
         };
         this.$http.get('/github/users/lzx2005/repos', obj).then((response) => {
@@ -49,9 +50,10 @@
           this.repos = response.body;
           this.spinShow = false;
         }, (response) => {
+          console.log(response);
           this.$Notice.error({
             title: '请求失败',
-            desc: response ? response.msg : '请求失败，请联系管理员crow2005@vip.qq.com'
+            desc: response ? response.body.message : '请求失败，请联系管理员crow2005@vip.qq.com'
           });
           this.spinShow = false;
         });
