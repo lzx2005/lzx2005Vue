@@ -17,6 +17,13 @@ module.exports = {
         pathRewrite: {
           '/iapi': ''
         }
+      },
+      '/github':{
+        target: 'https://api.github.com',
+        changeOrigin: true,
+        pathRewrite: {
+          '/github': ''
+        }
       }
     },
     // Various Dev Server settings

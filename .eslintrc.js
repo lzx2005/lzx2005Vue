@@ -27,6 +27,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'semi': ['error','always'],
     'indent': 0,
-    "vue/html-self-closing": "off"
+    "vue/html-self-closing": "off",
+    "x-invalid-end-tag": true,
+    "vue/no-parsing-error": [2, { "x-invalid-end-tag": false }]
   }
 };
