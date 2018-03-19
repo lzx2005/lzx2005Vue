@@ -4,7 +4,7 @@
       <Spin size="large" fix></Spin>
     </div>
     <transition-group name="slide-fade">
-      <div class="info-div" v-for="blog of blogs" :key="blog.blog_id" @click="getBlog(blog.blog_id)">
+      <div class="info-div" v-for="blog of blogs" :key="blog.blogId" @click="getBlog(blog.blogId)">
         <Card class="card">
           <p slot="title">{{blog.title}}</p>
           <p slot="extra">
@@ -28,7 +28,7 @@
             <Tooltip content="发布时间" placement="left">
               <div>
                 <Icon type="ios-timer"></Icon>
-                ：{{blog.create_time | formatDate}}
+                ：{{blog.createTime | formatDate}}
               </div>
             </Tooltip>
           </div>
@@ -80,7 +80,7 @@
           </div>
           <div class="blog-info-desc-item">
             <Icon type="ios-timer" size="30"></Icon>
-            <div>{{blog.create_time | formatDate}}</div>
+            <div>{{blog.createTime | formatDate}}</div>
           </div>
         </div>
       </div>
@@ -127,19 +127,25 @@
     },
     methods: {
       getBlogs (page) {
+        let obj = {
+          params: {
+            page: 1,
+            pageSize: 10
+          }
+        };
         // 清空当前列表
         this.blogs = [];
         // 打开加载条显示
         this.spinShow = true;
         // Lambda写法
-        this.$http.get('/iapi/blogs/' + page, {}).then((response) => {
+        this.$http.get('/iapi/blog/list', obj).then((response) => {
           // 响应成功回调
           this.spinShow = false;
-          this.blogs = response.body.data;
-          let resultSize = response.body.data.length;
-          let pageSize = response.body.info.pageSize;
+          this.blogs = response.body.list;
+          let resultSize = response.body.size;
+          let pageSize = response.body.pageSize;
           this.hasNextPage = resultSize >= pageSize;
-          this.page = response.body.info.page;
+          this.page = response.body.pageNum;
           this.hasPrevPage = this.page > 1;
           this.buttonLoading = false;
         }, (response) => {
@@ -167,7 +173,7 @@
         this.blog = {};
         this.blogSpinShow = true;
         this.blogModal = true;
-        this.$http.get('/iapi/blogs/d/' + id, {}).then((response) => {
+        this.$http.get('/iapi/blog/' + id, {}).then((response) => {
           let blog = response.body.data;
           this.blogSpinShow = false;
           console.log(blog);
