@@ -1,12 +1,12 @@
 <template>
   <div class="header-main">
     <div class="avatar">
-      <img src="./avatar.jpg" width="200" height="200"/>
+      <img src="./avatar3.jpg" width="200" height="200"/>
     </div>
     <div class="name">John Lee</div>
     <div class="word">
       1994年出生，2017年本科毕业，Java程序员。<br/>曾就职于有数金服、小泰科技，
-      喜爱但不限于Java、前端、Python、小程序、Android等相关知识，本网站主要负责记录本人的一些开发手记，以及展示个人简历。
+      喜爱但不限于Java、前端、Python、小程序、Android等相关知识。<br/>本网站主要负责记录本人的一些开发手记，以及展示个人简历。
     </div>
     <v-soc></v-soc>
   </div>

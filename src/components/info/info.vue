@@ -129,7 +129,7 @@
       getBlogs (page) {
         let obj = {
           params: {
-            page: 1,
+            page: page,
             pageSize: 10
           }
         };
@@ -247,8 +247,8 @@
     padding 0px 80px 20px 80px;
     font-size 16px;
     line-height 1;
+    margin 0px 20px 0px 20px;
     div
-      overflow scroll;
       -webkit-overflow-scrolling touch;
       -moz-overflow-scrolling touch;
       -o-overflow-scrolling touch;
