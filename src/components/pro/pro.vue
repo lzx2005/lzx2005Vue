@@ -9,19 +9,21 @@
     <template>
       <Row :gutter="24">
         <i-col span="12" v-for="repo of repos" :key="repo.id">
-          <div>
-            <Card class="repo-card">
-              <p slot="title">{{repo.name}}</p>
-              <p slot="extra">
-                <Tag color="blue" v-if="repo.language">{{repo.language}}</Tag>
-                <Tag color="default" v-else>未指定语言</Tag>
-              </p>
-              <Poptip trigger="hover" title="详细描述" :content="repo.description" placement="bottom">
-                <p class="desc-p" v-if="repo.description">{{repo.description}}</p>
-                <p class="desc-p" v-else>No description</p>
-              </Poptip>
-            </Card>
-          </div>
+          <a target="_blank" :href="repo.html_url" class="a-block">
+            <div>
+              <Card class="repo-card">
+                <p slot="title">{{repo.name}}</p>
+                <p slot="extra">
+                  <Tag color="blue" v-if="repo.language">{{repo.language}}</Tag>
+                  <Tag color="default" v-else>未指定语言</Tag>
+                </p>
+                <Poptip trigger="hover" title="详细描述" :content="repo.description" placement="bottom">
+                  <p class="desc-p" v-if="repo.description">{{repo.description}}</p>
+                  <p class="desc-p" v-else>No description</p>
+                </Poptip>
+              </Card>
+            </div>
+          </a>
         </i-col>
       </Row>
     </template>
@@ -77,6 +79,10 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+  .a-block
+    color: #000
+  .a-block:hover
+    color: #000
   .title-h2
     margin-bottom 10px
   .spin-container
